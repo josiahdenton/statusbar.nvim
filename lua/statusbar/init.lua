@@ -1,42 +1,29 @@
 local M = {}
 
-local store = require("statusbar.store")
-local ui = require("statusbar.ui")
-local segments = require("statusbar.segments")
+local line = require("statusbar.line")
+local bar = require("statusbar.bar")
 
-local draw_loop = function()
-    local timer = vim.uv.new_timer()
-    timer:start(
-        0,
-        30000,
-        vim.schedule_wrap(function()
-            vim.cmd("redrawstatus")
-        end)
-    )
-end
+--- @class statusbar.Config
+--- @field use_winbar boolean
+--- @field use_statusline boolean
 
-M.render = function()
-    store.tick()
-    return ui.render(store.state())
-end
+--- @type statusbar.Config
+local default_config = {
+	use_winbar = true,
+	use_statusline = true,
+}
 
-M.setup = function()
-    segments.setup()
-    vim.api.nvim_create_autocmd({ "VimEnter", "BufWinEnter" }, {
-        group = vim.api.nvim_create_augroup("user/winbar", { clear = true }),
-        desc = "Attach winbar",
-        callback = function(args)
-            if
-                not vim.api.nvim_win_get_config(0).zindex -- Not a floating window
-                and vim.bo[args.buf].buftype == "" -- Normal buffer
-                and not vim.wo[0].diff -- Not in diff mode
-            then
-                vim.o.showtabline = 0
-                vim.wo.winbar = "%{%v:lua.require'statusbar'.render()%}"
-            end
-        end,
-    })
-    draw_loop()
+--- @param opts ?statusbar.Config
+M.setup = function(opts)
+	opts = opts or default_config
+
+	if opts.use_winbar ~= nil and opts.use_winbar then
+		bar.setup()
+	end
+
+	if opts.use_statusline ~= nil and opts.use_statusline then
+		line.setup()
+	end
 end
 
 return M
