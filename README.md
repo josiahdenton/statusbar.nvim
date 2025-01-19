@@ -22,7 +22,8 @@ is where the statusbar plugin comes in!
 
 ## Examples
 
-<img width="1509" alt="image" src="https://github.com/user-attachments/assets/464b405d-bfa3-4726-8c8b-73ae19245a10" />
+<img width="1509" alt="image" src="https://github.com/user-attachments/assets/31294f36-034d-4464-9ccb-420eb6141bb7" />
+
 
 ## Roadmap
 
