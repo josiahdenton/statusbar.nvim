@@ -20,4 +20,12 @@ is where the statusbar plugin comes in!
 },
 ```
 
-## Usage
+## Examples
+
+<img width="1509" alt="image" src="https://github.com/user-attachments/assets/464b405d-bfa3-4726-8c8b-73ae19245a10" />
+
+## Roadmap
+
+- [ ] more configuration
+- [ ] more segment options
+- [ ] documentation
