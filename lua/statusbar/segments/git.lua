@@ -15,18 +15,18 @@ local valid = {
 
 local branch = function()
 	if cache.branch and valid.branch then
-		return " " .. cache.branch
+		return cache.branch
 	end
 
 	vim.system({ "git", "branch", "--show-current" }, { text = true }, function(out)
 		if out.stdout and out.stdout ~= "" then
-			cache.branch = " " .. string.gsub(out.stdout, "%s+", "")
+			cache.branch = "  " .. string.gsub(out.stdout, "%s+", "")
 		else
 			cache.branch = "(unknown)"
 		end
 		valid.branch = true
 	end)
-	return (cache.brand and " " .. cache.branch) or ""
+	return cache.branch or ""
 end
 
 --- @alias tabby.ChangeType "file"|"ins"|"del"
