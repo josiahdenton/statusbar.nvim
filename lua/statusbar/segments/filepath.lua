@@ -7,7 +7,7 @@ local file_path = function()
 	local path = vim.fn.expand("%:.")
 	local file = vim.fn.fnamemodify(path, ":t")
 	if #file == 0 then
-		return "󰽤"
+		return "󰏫 "
 	end
 	return file .. (vim.bo.modified and "  " or "")
 end
