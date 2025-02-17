@@ -15,13 +15,6 @@ local valid = {
 }
 
 --- fetches the drift between this branch and origin
---- first command represents how many origin/main is ahead
---- second represents number we are ahead
---- git fetch
---- git rev-list --count HEAD..origin/main
---- # outputs "1"
---- git rev-list --count origin/main..HEAD
---- # outputs "1"
 --- @return string
 local drift = function()
 	if cache.branch == "(unknown)" or not cache.branch then
