@@ -44,7 +44,8 @@ local drift = function()
 		)
 	end
 
-	return " " .. (cache.drift.head == 0 and "" or string.format(" [%d] ", cache.drift.head))
+	return " "
+		.. (cache.drift.head == 0 and "" or string.format(" [%d] ", cache.drift.head))
 		.. (cache.drift.origin == 0 and "" or string.format(" [%d] ", cache.drift.origin))
 end
 
@@ -127,18 +128,28 @@ M.setup = function()
 		end,
 	})
 
+	local group = vim.api.nvim_create_augroup("hacked.git.refresh", { clear = true })
+
 	vim.api.nvim_create_autocmd({ "VimEnter", "FocusGained", "BufEnter", "BufLeave" }, {
-		group = vim.api.nvim_create_augroup("user/winbar/git", { clear = true }),
-		desc = "Attach statusline",
+		group = group,
 		callback = vim.schedule_wrap(function()
 			valid.branch = false
 			valid.drift = false
 		end),
 	})
 
+	vim.api.nvim_create_autocmd("User", {
+		pattern = "MiniGitCommandDone",
+		group = group,
+		callback = vim.schedule_wrap(function()
+			valid.branch = false
+			valid.drift = false
+			valid.stat = false
+		end),
+	})
+
 	vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost" }, {
-		group = vim.api.nvim_create_augroup("user/winbar/git", { clear = true }),
-		desc = "Attach statusline",
+		group = group,
 		callback = vim.schedule_wrap(function()
 			valid.stat = false
 		end),
