@@ -5,7 +5,7 @@ but still wanted all the info that typically comes with a statusline. This
 is where the statusbar plugin comes in! 
 
 > [!caution]
-> bugs may exist, please report
+> plugin still in a "draft" state and is designed for my needs.
 
 ## Install
 
