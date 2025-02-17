@@ -98,15 +98,22 @@ local stat = function()
 			if changes and #changes > 0 then
 				local changes_by_type = vim.split(changes, ",", { trimempty = true })
 				local content = {}
+				local total = 0
 				for _, change in ipairs(changes_by_type) do
 					local amount = string.match(change, "%d+")
+					total = total + tonumber(vim.trim(amount))
 					local symbol, hg = change_symbol(change)
+					table.insert(content, { " ", "Comment" })
 					table.insert(content, { amount, "Comment" })
 					table.insert(content, { " ", "Comment" })
 					table.insert(content, { symbol, hg })
 					table.insert(content, { " ", "Comment" })
 				end
-				cache.stat = content
+				if total > 0 then
+					cache.stat = content
+				else
+					cache.stat = {}
+				end
 			end
 		else
 			cache.stat = {}
