@@ -2,14 +2,29 @@ local M = {}
 
 local store = require("statusbar.store")
 
+local icons = {
+	lua = " ",
+	python = "󰌠 ",
+	typescriptreact = " ",
+	json = " ",
+	html = " ",
+	css = " ",
+	go = " ",
+	rust = " ",
+	typescript = "󰛦 ",
+    javascript = " "
+}
+
 --- @return string
 local file_path = function()
+	local bufnr = vim.api.nvim_get_current_buf()
 	local path = vim.fn.expand("%:.")
 	local file = vim.fn.fnamemodify(path, ":t")
+	local ext = vim.bo[bufnr].filetype
 	if #file == 0 then
 		return "󰏫 "
 	end
-	return file .. (vim.bo.modified and "  " or "")
+	return (icons[ext] or "") .. file .. (vim.bo.modified and "  " or "")
 end
 
 M.setup = function()
