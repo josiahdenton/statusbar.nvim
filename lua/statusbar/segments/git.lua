@@ -92,7 +92,7 @@ local stat = function()
 	end
 
 	vim.system({ "git", "diff", "--stat" }, { text = true }, function(out)
-		if out.stdout then
+		if #out.stdout > 0 then
 			local lines = vim.split(out.stdout, "\n", { trimempty = true })
 			local changes = lines[#lines]
 			if changes and #changes > 0 then
