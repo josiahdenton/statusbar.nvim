@@ -128,10 +128,10 @@ M.setup = function()
 		name = "git",
 		split = false,
 		focused = function()
-			return { { branch, "MiniIconsGreen" }, { " │", "Comment" }, { drift, "Comment" }, unpack(stat()) }
+			return { { branch, "MiniIconsGreen" }, { drift, "Comment" }, unpack(stat()) }
 		end,
 		default = function()
-			return { { branch, "MiniIconsGreen" }, { " │", "Comment" }, { drift, "Comment" }, unpack(stat()) }
+			return { { branch, "MiniIconsGreen" }, { drift, "Comment" }, unpack(stat()) }
 		end,
 	})
 
