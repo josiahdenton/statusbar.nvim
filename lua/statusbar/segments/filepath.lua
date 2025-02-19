@@ -6,13 +6,14 @@ local icons = {
 	lua = " ",
 	python = "󰌠 ",
 	typescriptreact = " ",
+	javascriptreact = " ",
 	json = " ",
 	html = " ",
 	css = " ",
 	go = " ",
 	rust = " ",
 	typescript = "󰛦 ",
-    javascript = " "
+	javascript = " ",
 }
 
 --- @return string
