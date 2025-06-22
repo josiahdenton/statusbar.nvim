@@ -62,6 +62,7 @@ local branch = function()
 		end
 		valid.branch = true
 	end)
+
 	return cache.branch and ("  " .. cache.branch) or ""
 end
 
@@ -122,8 +123,6 @@ local stat = function()
 	end)
 	return cache.stat or {}
 end
-
--- TODO: don't show stat unless there is enough room
 
 M.setup = function()
 	store.register_segment({

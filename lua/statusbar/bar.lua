@@ -59,10 +59,14 @@ end
 
 M.setup = function()
 	segments.setup()
-	vim.api.nvim_create_autocmd({ "VimEnter", "WinEnter", "BufWinEnter" }, {
+	vim.api.nvim_create_autocmd({ "VimEnter", "BufWinEnter", "WinEnter" }, {
 		group = vim.api.nvim_create_augroup("statusbar/winbar", { clear = true }),
 		desc = "Attach winbar",
-		callback = function()
+		callback = function(args)
+			if vim.bo[args.buf].buftype ~= "" then
+				return -- no need to recalculate for wins that aren't normal buffers
+			end
+
 			vim.o.showtabline = 0
 			local to_draw = get_drawable_wins()
 

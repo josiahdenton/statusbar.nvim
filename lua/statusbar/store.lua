@@ -4,7 +4,6 @@ local M = {}
 --- @field content table<statusbar.Content>
 --- @field focused string segment currently in focus, "default" for no segment in focus
 --- @field segments statusbar.Segment[] table of available printers
---- @field active_winr integer which window to draw only the filepath segment
 
 --- @alias statusbar.SegmentName "default"|"player"|"git"|"filepath"|"stats"|"pager"|"system"
 
@@ -63,10 +62,6 @@ end
 --- @param name statusbar.SegmentName
 M.focus_on = function(name)
 	state.focused = name
-end
-
-M.focus_winr = function(winr)
-	state.active_winr = winr
 end
 
 --- update state, will run before ui.render
