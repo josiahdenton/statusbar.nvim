@@ -51,7 +51,7 @@ end
 
 local branch = function()
 	if cache.branch and valid.branch then
-		return "  " .. cache.branch
+		return "  " .. cache.branch
 	end
 
 	vim.system({ "git", "branch", "--show-current" }, { text = true }, function(out)
@@ -122,6 +122,8 @@ local stat = function()
 	end)
 	return cache.stat or {}
 end
+
+-- TODO: don't show stat unless there is enough room
 
 M.setup = function()
 	store.register_segment({
