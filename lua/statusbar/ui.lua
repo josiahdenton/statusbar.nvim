@@ -1,10 +1,10 @@
 local M = {}
 
---- @param state statusbar.State
+--- @param to_draw statusbar.Content[]
 --- @return string
-M.winbar = function(state)
+M.winbar = function(to_draw)
 	local winbar = ""
-	for _, content in ipairs(state.content) do
+	for _, content in ipairs(to_draw) do
 		local segment = table.concat(
 			vim.iter(content.display)
 				:map(function(pair)
