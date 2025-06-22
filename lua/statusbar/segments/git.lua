@@ -12,6 +12,10 @@ local valid = {
 	drift = false,
 }
 
+local fetch = function()
+	vim.system({ "git", "fetch" })
+end
+
 --- fetches the drift between this branch and origin
 --- @return string
 local drift = function()
@@ -77,6 +81,14 @@ M.setup = function()
 	})
 
 	local group = vim.api.nvim_create_augroup("hacked.git.refresh", { clear = true })
+
+	vim.api.nvim_create_autocmd({ "VimEnter" }, {
+		group = group,
+		callback = vim.schedule_wrap(function()
+			-- ensure the drift is up to date
+			fetch()
+		end),
+	})
 
 	vim.api.nvim_create_autocmd({ "VimEnter", "FocusGained", "BufEnter", "BufLeave" }, {
 		group = group,
